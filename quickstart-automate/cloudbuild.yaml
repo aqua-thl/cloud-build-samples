@@ -17,6 +17,7 @@ steps:
     env:
       - 'TRIVY_RUN_AS_PLUGIN=aqua'
       - 'TRIGGERED_BY=PUSH'
+      - 'CI=true'
     secretEnv:
       - 'AQUA_KEY'
       - 'AQUA_SECRET'    
