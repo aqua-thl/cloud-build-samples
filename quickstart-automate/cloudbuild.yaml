@@ -14,6 +14,26 @@
 
 # [START cloudbuild_quickstart_automate]
 steps:
+  - name: aquasec/trivy
+    env:
+      - 'TRIVY_RUN_AS_PLUGIN=aqua'
+      - 'TRIGGERED_BY=PUSH'
+    secretEnv:
+      - 'AQUA_KEY'
+      - 'AQUA_SECRET'    
+    args:
+      - fs
+      - --security-checks
+      - config,vuln,secret
+      - --no-progress
+      -  --skip-dirs
+      - target
+      - .
   - name: golang
     args: ['go', 'run', 'quickstart-automate/main.go']
-# [END cloudbuild_quickstart_automate]
+availableSecrets:
+  secretManager:
+  - versionName: projects/501343224100/secrets/aqua-sccs-emea-key/versions/1
+    env: 'AQUA_KEY'
+  - versionName: projects/501343224100/secrets/aqua-sccs-emea-secret/versions/1
+    env: 'AQUA_SECRET'# [END cloudbuild_quickstart_automate]
