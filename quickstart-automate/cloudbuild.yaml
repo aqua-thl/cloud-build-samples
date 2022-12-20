@@ -1,6 +1,21 @@
 # [START cloudbuild_quickstart_automate]
 steps:
   - name: aquasec/trivy
+    id: 'debug'
+    entrypoint: sh
+    env:
+      - 'TRIVY_RUN_AS_PLUGIN=aqua'
+      - 'TRIGGERED_BY=PUSH'
+    secretEnv:
+      - 'AQUA_KEY'
+      - 'AQUA_SECRET'    
+    args:
+      - -c
+      - printenv
+      - pwd
+      - find .
+  - name: aquasec/trivy
+    id: 'trivy-scan'
     env:
       - 'TRIVY_RUN_AS_PLUGIN=aqua'
       - 'TRIGGERED_BY=PUSH'
