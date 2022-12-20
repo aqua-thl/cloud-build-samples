@@ -11,11 +11,11 @@ steps:
       - 'AQUA_SECRET'    
     args:
       - -c
-      - "printenv; pwd; find ."
+      - "printenv;"
   - name: aquasec/trivy
     id: 'trivy-scan'
     env:
-      - 'CI_BUILD_ID=$BUILD_ID'
+      - 'CI_JOB_ID=$BUILD_ID'
       - 'TRIVY_RUN_AS_PLUGIN=aqua'
       - 'TRIGGERED_BY=PUSH'
       - 'CI=true'
