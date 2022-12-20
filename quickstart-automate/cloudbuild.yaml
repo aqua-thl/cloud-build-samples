@@ -11,9 +11,7 @@ steps:
       - 'AQUA_SECRET'    
     args:
       - -c
-      - "printenv;"
-      - "pwd;"
-      - "find ."
+      - "printenv; pwd; find ."
   - name: aquasec/trivy
     id: 'trivy-scan'
     env:
